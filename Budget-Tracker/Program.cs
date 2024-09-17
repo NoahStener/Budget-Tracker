@@ -14,7 +14,8 @@ namespace Budget_Tracker
             builder.Services.AddControllersWithViews();
 
             //Sql provider
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString")));
+            builder.Services.AddDbContext<AppDbContext>(options => 
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString")));
 
             //Register SyncFusion License
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2U1hhQlJBfV5CQmJPYVF2R2dJdlRydV9GYUwgOX1dQl9nSXdScEVqW31ccHRWQGM=");
