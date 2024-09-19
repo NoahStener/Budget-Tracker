@@ -39,13 +39,13 @@
         <a class="btn btn-sm no-a-decoration" href="/Category/AddOrEdit/${CategoryID}">
             <i class="fa-solid fa-pen fa-lg"></i>
         </a>
-        <form action="/Category/Delete/${CategoryID}" method="post">
-        @Html.AntiForgeryToken()
+    <form action="/Category/Delete/${CategoryID}" method="post">
+    @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-sm btn-link no-a-decoration"
         onclick="return confirm(&quot; Are you sure to delete this record?&quot;)">
             <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
         </button>
     </form>
     </div>
-    
+
 </script> 
