@@ -15,5 +15,23 @@ namespace Budget_Tracker.Models
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime Date {  get; set; } = DateTime.Now;
 
+
+        [NotMapped]
+        public string? FormattedAmount
+        {
+            get
+            {
+                return ((Category == null || Category.Type == "Expense") ? "- " : "+ ") + Amount.ToString("C");
+            }
+        }
+
+        [NotMapped]
+        public string? CategoryTitleWithIcon
+        {
+            get
+            {
+                return Category == null ? "" : Category.Icon + " " + Category.Title;
+            }
+        }
     }
 }

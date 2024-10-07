@@ -100,7 +100,7 @@ namespace Budget_Tracker.Controllers
                 _context.Categories.Remove(category);
             }
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
 

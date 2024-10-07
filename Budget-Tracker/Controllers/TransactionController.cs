@@ -18,7 +18,7 @@ namespace Budget_Tracker.Controllers
         public async Task<IActionResult> Index()
         {
             var appDbContext = _context.Transactions.Include(t => t.Category);
-            return View(await appDbContext.ToListAsync());
+            return View(await appDbContext.ToArrayAsync());
 
         }
 
@@ -29,7 +29,9 @@ namespace Budget_Tracker.Controllers
             {
                 return NotFound();
             }
-            var transaction = await _context.Transactions.Include(t => t.Category).FirstOrDefaultAsync(m => m.TransactionID == id);
+
+            var transaction = await _context.Transactions.Include(t => t.Category)
+                .FirstOrDefaultAsync(m => m.TransactionID == id);
 
             if(transaction == null)
             {
@@ -82,7 +84,9 @@ namespace Budget_Tracker.Controllers
             {
                 NotFound();
             }
-            var transaction = await _context.Transactions.Include(t => t.Category).FirstOrDefaultAsync(m => m.TransactionID == id);
+            var transaction = await _context.Transactions
+                .Include(t => t.Category).FirstOrDefaultAsync(m => m.TransactionID == id);
+
             if(transaction == null)
             {
                 return NotFound();
@@ -90,8 +94,9 @@ namespace Budget_Tracker.Controllers
             return View(transaction);
         }
 
+
         //Post: Transaction/delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult>DeleteConfirmed(int id)
         {
@@ -101,7 +106,7 @@ namespace Budget_Tracker.Controllers
                 _context.Transactions.Remove(transaction);
             }
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
 

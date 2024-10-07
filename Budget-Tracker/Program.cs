@@ -18,7 +18,7 @@ namespace Budget_Tracker
                 options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString")));
 
             //Register SyncFusion License
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2U1hhQlJBfV5CQmJPYVF2R2dJdlRydV9GYUwgOX1dQl9nSXdScEVqW31ccHRWQGM=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2U1hhQlJBfV5CQmJPYVF2R2dJdlRydV9GYUwgOX1dQl9nSH5TcUVlXXxecHZWQGU=");
 
 
             var app = builder.Build();
@@ -40,7 +40,7 @@ namespace Budget_Tracker
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
             app.Run();
         }
