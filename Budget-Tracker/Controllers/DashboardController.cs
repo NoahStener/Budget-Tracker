@@ -88,6 +88,23 @@ namespace Budget_Tracker.Controllers
             //Combine Income and Expense
             string[] Last7Days = Enumerable.Range(0, 7).Select(i => StartDate.AddDays(i).ToString("dd-MMM")).ToArray();
 
+            ViewBag.SplineChartData = from day in Last7Days
+                                      join income in IncomeSummary on day equals income.Day into dayIncomeJoined
+                                      from income in dayIncomeJoined.DefaultIfEmpty()
+                                      join expense in ExpenseSummary on day equals expense.Day into expenseJoined
+                                      from expense in expenseJoined.DefaultIfEmpty()
+                                      select new
+                                      {
+                                          Day = day,
+                                          Income = income == null ? 0 : income.Income,
+                                          Expense = expense == null ? 0 : expense.Expense,
+                                      };
+
+            //Recent transactions
+            ViewBag.RecentTransactions = await _context.Transactions
+                .Include(i => i.Category)
+                .OrderByDescending(j => j.Date).Take(5).ToListAsync();
+
             return View();
         }
     }
